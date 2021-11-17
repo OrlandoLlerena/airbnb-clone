@@ -1,8 +1,24 @@
+import Image from "next/image";
+
 function Header() {
   return (
-    <div>
-      <h1>I am your header</h1>
-    </div>
+    <header>
+      {/* left */}
+      <div className="relative flex items-center h-10">
+        <Image
+          src="http://links.papareact.com/qd3"
+          layout="fill"
+          objectFit="contain"
+          objectPosition="left"
+        />
+      </div>
+
+      {/* middle */}
+      <div></div>
+
+      {/* right */}
+      <div></div>
+    </header>
   );
 }
 
