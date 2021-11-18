@@ -4,6 +4,7 @@ import Image from "next/image";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import InfoCard from "../components/InfoCard";
+import Map from "../components/Map";
 
 function Search({ searchResult }) {
   const router = useRouter();
@@ -51,6 +52,10 @@ function Search({ searchResult }) {
               )
             )}
           </div>
+        </section>
+
+        <section>
+          <Map />
         </section>
       </main>
 
