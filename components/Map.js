@@ -4,6 +4,8 @@ import getCenter from "geolib/es/getCenter";
 import { useEffect } from "react";
 
 function Map({ searchResults }) {
+  const [selectedLocation, setSelectedLocation] = useState({});
+
   // Transform the search results to usable latitude and longitude object for getCenter
   //  { latitude: 51.503333, longitude: -0.119722 }
   const coordinates = searchResults.map((result) => ({
@@ -28,16 +30,36 @@ function Map({ searchResults }) {
       {...viewport}
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
     >
-      {searchResults.map(({ long, lat }) => (
-        <div key={long}>
+      {searchResults.map((result) => (
+        <div key={result.long}>
           <Marker
-            longitude={long}
-            latitude={lat}
+            longitude={result.long}
+            latitude={result.lat}
             offsetLeft={-20}
             offsetTop={-10}
           >
-            <p className="cursor-pointer">📌</p>
+            <p
+              role="img"
+              onClick={() => setSelectedLocation(result)}
+              className="cursor-pointer text-2xl animate-bounce"
+              aria-label="push-pin"
+            >
+              📌
+            </p>
           </Marker>
+          {/* this is the popup that appears when picked */}
+          {selectedLocation.long === result.long ? (
+            <Popup
+              onClose={() => setSelectedLocation({})}
+              closeOnClick={true}
+              latitude={result.lat}
+              longitude={result.long}
+            >
+              {result.title}
+            </Popup>
+          ) : (
+            false
+          )}
         </div>
       ))}
     </ReactMapGL>
